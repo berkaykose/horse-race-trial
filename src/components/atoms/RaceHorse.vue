@@ -1,28 +1,25 @@
 <template>
-  <div class="w-96 h-[518px] mt-4 overflow-auto">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-        <tr>
-          <th class="px-6 py-3">Name</th>
-          <th class="px-6 py-3">Condition</th>
-          <th class="px-6 py-3">Color</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-          v-for="horse in horses"
-          :key="horse.color"
-        >
-          <td class="px-6 py-4">{{ horse.name }}</td>
-          <td class="px-6 py-4">{{ horse.condition }}</td>
-          <td class="px-6 py-4 uppercase" :style="{ color: horse.color }">
-            {{ horse.color }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div>
+    <font-awesome-icon
+      :icon="['fas', 'horse']"
+      class="absolute top-1/2 transform -translate-y-1/2 transition-all"
+      :style="{
+        left: `${(horse.position / raceDistances[raceNumber - 1]) * raceTrackWidth}px`,
+        color: horse.color
+      }"
+    />
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script setup lang="ts">
+import { Horse } from '../../store/horseUtils'
+
+const props = defineProps<{
+  raceDistances: []
+  raceNumber: number
+  raceTrackWidth: number
+  horse: Horse
+}>()
+</script>
+
+<style scoped></style>

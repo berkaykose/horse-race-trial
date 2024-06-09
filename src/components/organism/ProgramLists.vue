@@ -1,20 +1,26 @@
 <template>
-  <div class="mt-4">
-    <ListHeader title="Program Lists" color="teal" />
-    <div class="h-[82vh] overflow-y-scroll">
-      <RaceTable title="1ST Lap - 1200M" :raceNumber="1" />
-      <RaceTable title="2ND Lap - 1400M" :raceNumber="2" />
-      <RaceTable title="3RD Lap - 1600M" :raceNumber="3" />
-      <RaceTable title="4TH Lap - 1800M" :raceNumber="4" />
-      <RaceTable title="5TH Lap - 2000M" :raceNumber="5" />
-      <RaceTable title="6TH Lap - 2200M" :raceNumber="6" />
+  <div class="mt-4 w-[15rem]">
+    <ListHeader title="Program Lists" color="blue" />
+    <div class="h-[82vh] overflow-y-scroll border border-gray-900">
+      <RaceTable
+        v-for="(horses, index) in selectedHorses"
+        :key="index"
+        :title="`Lap ${index + 1} - ${1200 + index * 200}M`"
+        :results="horses"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import RaceTable from '../molecules/RaceTable.vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+import { key } from '../../store'
 import ListHeader from '../atoms/ListHeader.vue'
+import RaceTable from '../molecules/RaceTable.vue'
+
+const store = useStore(key)
+const selectedHorses = computed(() => store.getters.selectedHorses)
 </script>
 
 <style scoped></style>

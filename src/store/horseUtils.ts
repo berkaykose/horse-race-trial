@@ -3,6 +3,8 @@ export interface Horse {
     color: string;
     condition: number;
     speed: number;
+    position: number;
+    ranking?: number;
 }
 
 export const horseNames = [
@@ -13,7 +15,7 @@ export const horseNames = [
 ];
 
 export const horseColors = [
-    "brown", "black", "white", "blue", "red", "yellow",
+    "brown", "black", "tan", "blue", "red", "yellow",
     "green", "orange", "purple", "pink", "gray", "cyan",
     "magenta", "lime", "indigo", "violet", "gold", "silver",
     "maroon", "navy"
@@ -44,9 +46,13 @@ export function generateRandomHorses(count: number): Horse[] {
 
         const condition = Math.floor(Math.random() * 100) + 1;
 
-        const speed = Math.floor(Math.random() * 41) + 60;
+        const baseSpeed = 50;
+        const speedRange = 20;
+        const speed = baseSpeed + (condition / 100) * speedRange;
 
-        generatedHorses.push({ name, color, condition, speed });
+        const ranking = undefined;
+
+        generatedHorses.push({ name, color, condition, speed, position: 0, ranking });
     }
 
     return generatedHorses;
@@ -61,7 +67,9 @@ export function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function getRandomHorses(horses: Horse[], count: number): Horse[] {
-    const shuffledHorses = shuffleArray(horses);
+    const copyHorses = [...horses]
+    copyHorses.map(horse => horse.position = 0)
+    const shuffledHorses = shuffleArray(copyHorses);
     return shuffledHorses.slice(0, count);
 }
 
