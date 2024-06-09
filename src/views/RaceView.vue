@@ -17,11 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import HeaderNav from '../components/organism/HeaderNav.vue'
-import HorseList from '../components/organism/HorseList.vue'
-import ProgramLists from '../components/organism/ProgramLists.vue'
-import ResultLists from '../components/organism/ResultLists.vue'
-import RaceTrack from '../components/organism/RaceScreen.vue'
+import HeaderNav from '../components/organisms/HeaderNav.vue'
+import HorseList from '../components/organisms/HorseList.vue'
+import ProgramLists from '../components/organisms/ProgramLists.vue'
+import ResultLists from '../components/organisms/ResultLists.vue'
+import RaceTrack from '../components/organisms/RaceScreen.vue'
 </script>
 
 <style scoped></style>

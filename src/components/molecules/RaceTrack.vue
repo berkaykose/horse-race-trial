@@ -56,7 +56,7 @@ const raceTrackWidth = ref(970)
 const updateRaceTrackWidth = () => {
   const raceTrackElement = document.getElementById('raceTrack')
   if (raceTrackElement) {
-    raceTrackWidth.value = raceTrackElement.clientWidth - 30 // -30 for the lane numbers
+    raceTrackWidth.value = raceTrackElement.clientWidth - 30
   }
 }
 
@@ -70,14 +70,14 @@ const resetHorsePositions = () => {
 }
 
 const updateHorsePositions = () => {
-  if (!isRaceRunning.value) return // Yarış durduysa işlemi sonlandır
+  if (!isRaceRunning.value) return
 
   const horses = selectedHorses.value[raceNumber.value - 1]
   let allHorsesFinished = true
 
   horses.forEach((horse) => {
     if (horse.position < raceDistances.value[raceNumber.value - 1]) {
-      horse.position = (horse.position ?? 0) + horse.speed * 0.1 // Daha dengeli hızlandırma
+      horse.position = (horse.position ?? 0) + horse.speed * 0.1
       if (horse.position >= raceDistances.value[raceNumber.value - 1]) {
         horse.position = raceDistances.value[raceNumber.value - 1]
         if (horse.ranking === undefined) {
@@ -92,15 +92,13 @@ const updateHorsePositions = () => {
   if (allHorsesFinished) {
     store.commit('updateRaceResults', { raceIndex: raceNumber.value - 1, results: horses })
     store.commit('setRaceRunning', false)
-    currentRanking = 0 // Bir sonraki yarış için sıralamayı sıfırla
+    currentRanking = 0
     if (raceNumber.value < 6) {
+      store.dispatch('nextRace')
       setTimeout(() => {
-        store.dispatch('nextRace')
-        setTimeout(() => {
-          resetHorsePositions()
-          store.commit('setRaceRunning', true)
-        }, 1000)
-      }, 2000)
+        resetHorsePositions()
+        store.commit('setRaceRunning', true)
+      }, 200)
     } else {
       store.commit('setRaceFinished', true)
     }
@@ -119,7 +117,7 @@ watch(raceNumber, (newVal, oldVal) => {
   if (newVal !== oldVal) {
     selectedHorses.value[newVal - 1].forEach((horse) => {
       horse.position = 0
-      horse.ranking = undefined // Yarış başlamadan önce sıralamayı sıfırla
+      horse.ranking = undefined
     })
     if (isRaceRunning.value) {
       updateHorsePositions()

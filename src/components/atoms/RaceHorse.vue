@@ -1,6 +1,7 @@
 <template>
   <div>
     <font-awesome-icon
+      id="horse-icon"
       :icon="['fas', 'horse']"
       class="absolute top-1/2 transform -translate-y-1/2 transition-all"
       :style="{

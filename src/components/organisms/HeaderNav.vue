@@ -35,6 +35,7 @@ import { key } from '../../store'
 const store = useStore(key)
 const isRaceFinished = computed(() => store.getters.isRaceFinished)
 const isRaceRunning = computed(() => store.getters.isRaceRunning)
+const selectedHorses = computed(() => store.getters.selectedHorses)
 
 const generateProgram = () => {
   if (isRaceRunning.value) {
@@ -45,7 +46,14 @@ const generateProgram = () => {
 }
 
 const startStopRace = () => {
-  store.dispatch('startStopRace')
+  if (selectedHorses.value[0].length) {
+    store.dispatch('startStopRace')
+  } else {
+    store.dispatch(
+      'showAlert',
+      'You cannot start a race without a proper race program. Please generate program first.'
+    )
+  }
 }
 
 const resetRace = () => {

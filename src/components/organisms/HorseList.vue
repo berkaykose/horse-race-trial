@@ -46,10 +46,8 @@ const generateHorses = () => {
 }
 
 onMounted(() => {
-  generateHorses() // Component yüklendiğinde atları oluştur
+  generateHorses()
 })
-
-// typed as number
 </script>
 
 <style scoped></style>
