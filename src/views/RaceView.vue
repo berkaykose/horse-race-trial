@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto p-4">
+  <div class="mx-auto p-2">
     <HeaderNav />
     <div class="flex justify-between gap-4">
       <HorseList />
@@ -16,10 +16,10 @@
 </template>
 
 <script setup lang="ts">
-import HeaderNav from '../components/HeaderNav.vue'
-import HorseList from '../components/HorseList.vue'
-import ProgramLists from '../components/ProgramLists.vue'
-import ResultLists from '../components/ResultLists.vue'
+import HeaderNav from '../components/organism/HeaderNav.vue'
+import HorseList from '../components/organism/HorseList.vue'
+import ProgramLists from '../components/organism/ProgramLists.vue'
+import ResultLists from '../components/organism/ResultLists.vue'
 </script>
 
 <style scoped></style>

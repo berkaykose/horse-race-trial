@@ -2,6 +2,7 @@ export interface Horse {
     name: string;
     color: string;
     condition: number;
+    speed: number;
 }
 
 export const horseNames = [
@@ -41,9 +42,11 @@ export function generateRandomHorses(count: number): Horse[] {
         } while (usedColors.has(color));
         usedColors.add(color);
 
-        const condition = Math.floor(Math.random() * 46) + 55;
+        const condition = Math.floor(Math.random() * 100) + 1;
 
-        generatedHorses.push({ name, color, condition });
+        const speed = Math.floor(Math.random() * 41) + 60;
+
+        generatedHorses.push({ name, color, condition, speed });
     }
 
     return generatedHorses;
@@ -55,12 +58,10 @@ export function shuffleArray<T>(array: T[]): T[] {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
-
 }
 
 export function getRandomHorses(horses: Horse[], count: number): Horse[] {
-    const copyHorsesArray = [...horses]
-    const shuffledHorses = shuffleArray(copyHorsesArray)
+    const shuffledHorses = shuffleArray(horses);
     return shuffledHorses.slice(0, count);
 }
 

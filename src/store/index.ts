@@ -6,20 +6,20 @@ export const key: InjectionKey<Store<Horse>> = Symbol()
 
 export interface RootState {
     horses: Horse[];
-    selectedHorses: Horse[];
+    selectedHorses: Horse[][];
 }
 
 export const store = createStore<RootState>({
     state: {
         horses: [],
-        selectedHorses: []
+        selectedHorses: [],
     },
     mutations: {
         setHorses(state: { horses: Horse[]; }, horses: Horse[]) {
             state.horses = horses;
         },
-        setSelectedHorses(state: { selectedHorses: Horse[]; }, selectedHorses: Horse[]) {
-            state.selectedHorses = selectedHorses
+        setSelectedHorses(state: RootState, selectedHorses: Horse[][]) {
+            state.selectedHorses = selectedHorses;
         }
     },
     actions: {
@@ -28,7 +28,11 @@ export const store = createStore<RootState>({
             commit('setHorses', horses);
         },
         selectRacingHorses({ state, commit }: { state: RootState; commit: Function }) {
-            const selectedHorses = getRandomHorses(state.horses, 10);
+            const selectedHorses: Horse[][] = [];
+            for (let i = 0; i < 6; i++) {
+                const racingHorses = getRandomHorses(state.horses, 10);
+                selectedHorses.push(racingHorses);
+            }
             commit('setSelectedHorses', selectedHorses);
         }
     },

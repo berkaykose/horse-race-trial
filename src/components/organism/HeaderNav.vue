@@ -4,13 +4,13 @@
     <div class="flex gap-4">
       <button
         @click="generateProgram()"
-        class="bg-gray-400 hover:bg-yellow-400 px-4 py-2 border border-black"
+        class="bg-gray-400 hover:bg-yellow-300 px-4 py-2 border border-black"
       >
         Generate Program
       </button>
       <button
         @click="startStopRace()"
-        class="bg-gray-400 hover:bg-yellow-400 px-4 py-2 border border-black"
+        class="bg-gray-400 hover:bg-yellow-300 px-4 py-2 border border-black"
       >
         Start / Pause
       </button>
@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useStore } from 'vuex'
-import { key } from '../store'
+import { key } from '../../store'
 
 const store = useStore(key)
 
